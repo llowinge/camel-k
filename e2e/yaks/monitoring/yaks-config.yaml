@@ -17,12 +17,15 @@
 
 config:
   namespace:
-    temporary: true
+    temporary: false
+  runtime:
+    cucumber:
+      glue:
+        - "org.citrusframework.yaks"
+        - "org.apache.camelk"
 pre:
   - name: ObtainToekn
     script: obtainToken.sh
   - name: installation
     run: |
-      kamel install -n $YAKS_NAMESPACE
-
-      kamel run --name metrics Metrics.java -w -n $YAKS_NAMESPACE --dependency github:com.github.apache.camel-k:camel-k-example-metrics:master-SNAPSHOT
+      kamel run --name metrics Metrics.java -w -n $YAKS_NAMESPACE --dependency github:llowinge:camel-k:master-SNAPSHOT
